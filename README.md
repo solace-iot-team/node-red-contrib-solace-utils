@@ -1,2 +1,8 @@
-# node-red-contrib-solace-utils
-Solace utilities for Node-RED
+# node-red-solace-utils
+
+Collection of utility function for Node-RED.
+
+
+
+---
+The End.
