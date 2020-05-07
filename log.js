@@ -12,7 +12,7 @@ var flow = require('./flow.js');
 var _meta = {
   packageId: 'utils',
   componentId: 'log',
-  version: '0.1.0',
+  version: '0.1.1',
   shortName: 'log'
 }
 
@@ -23,18 +23,44 @@ function getMetaInfo() {
   _meta = flow.getMetaInfo(_meta);
   return _meta;
 }
-function getLogPath(logName) {
-  return '$parent.' + flow.getBasePath(_meta) + '.' + logName;
-}
+
 function createInitializedStateObject() {
   return {
   };
 }
 
+/**
+* log instance functions
+*/
+function getLogBasePath(logName) {
+  return '$parent.' + flow.getBasePath(_meta) + '.' + logName;
+}
+function getLogPath(logName) {
+  return getLogBasePath(logName) + '.log';
+}
+
+function createLogProperties(mips) {
+  return {
+    maxEntries: mips.maxEntries,
+    isAddTimestamp: mips.isAddTimestamp,
+    log: []
+  };
+}
+function createLogEntry(logProperties, logEntry) {
+  if(logProperties.isAddTimestamp) {
+    logEntry.timestamp = new Date().toISOString();
+  }
+  return logEntry;
+}
+
+
 module.exports = {
   getMetaInfo,
+  createInitializedStateObject,
+  getLogBasePath,
   getLogPath,
-  createInitializedStateObject
+  createLogProperties,
+  createLogEntry
 }
 
  // The end.

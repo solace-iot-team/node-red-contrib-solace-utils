@@ -25,6 +25,7 @@ var _startsWith = require('lodash.startswith');
 var _endsWith = require('lodash.endswith');
 var _find = require('lodash.find');
 var _merge = require('lodash.merge');
+var _toNumber = require('lodash.tonumber');
 
 
 /*
@@ -140,6 +141,9 @@ function find(collection, predicate, fromIndex) {
 function merge(object, sources) {
   return _merge(object, sources);
 }
+function toNumber(value) {
+  return _toNumber(value);
+}
 
 /**
 * validations
@@ -216,6 +220,7 @@ module.exports = {
    endsWith,
    find,
    merge,
+   toNumber,
    isValidPubTopicString,
    isValidId,
    validateStringPropertyIsValidPubTopic,
