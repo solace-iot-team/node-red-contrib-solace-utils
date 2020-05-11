@@ -6,12 +6,12 @@
 
 
 module.exports = {
-  SolaceError: require('./SolaceError.js'),
-  misc: require('./misc.js'),
-  flow: require('./flow.js'),
-  flowProperties: require('./flow-properties.js'),
-  forEach: require('./forEach.js'),
-  log: require('./log.js')
+  SolaceError: require('./src/SolaceError.js'),
+  misc: require('./src/misc.js'),
+  flow: require('./src/flow.js'),
+  flowProperties: require('./src/flow-properties.js'),
+  forEach: require('./src/forEach.js'),
+  log: require('./src/log.js')
 }
 
 // The end.

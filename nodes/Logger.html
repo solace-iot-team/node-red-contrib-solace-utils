@@ -1,0 +1,98 @@
+
+<!--
+<script type="text/javascript" src="../src/misc.js"></script>
+-->
+
+<script type="text/javascript">
+
+  RED.nodes.registerType('Logger', {
+      category: 'solace utils',
+      color: '#AAAA66',
+      defaults: {
+          log: {value: '0', type: 'Log'},
+          name: { value: '' },
+          method: { value: '', required: true },
+          msgPath: { value: 'msg.payload', validate: function(v) {
+
+            // must not be not empty if method = init or append
+            // must start with 'msg.'
+            // must have at least one part after 'msg.''
+
+            currentMethod = $('#node-input-method').val();
+              //console.log('Log.msgPath.validate: currentMethod = ' + currentMethod);
+
+            if(currentMethod === undefined) return true;
+            if(currentMethod !== 'init' && currentMethod !== 'append') return true;
+
+              //console.log("Log.msgPath.validate: v = '" + v + "'");
+            if(v === undefined || v === null || v === '') return false;
+            //if(misc.isStringEmpty(v)) return false;
+
+            let parts = v.split('.');
+              //console.log("Log.msgPath.validate: parts = " +  JSON.stringify(parts, null, 1));
+            if(parts.length < 2) return false;
+            if(parts[0] !== 'msg') return false;
+            if(parts[1] === '') return false;
+            return true;
+          }}
+        },
+      inputs:1,
+      outputs:1,
+      icon: "debug.svg",
+      label: function() {
+          return this.name || "logger";
+      },
+      paletteLabel: 'logger',
+
+      oneditprepare: function() {
+        $("#node-input-method").on("change", function() {
+          if( $(this).val() === 'init' || $(this).val() === 'append') {
+            $("#form-node-input-msgPath").show();
+          } else {
+            $("#form-node-input-msgPath").hide();
+          }
+        });
+      },
+  });
+</script>
+
+<script type="text/html" data-template-name="Logger">
+
+  <div class="form-row">
+    <label for="node-input-log"><i class="fa fa-database"></i> log</label>
+    <input type="text" id="node-input-log" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> name</label>
+    <input type="text" id="node-input-name" placeholder="logger.{method}({log-name})@{where}" />
+  </div>
+
+  <!--
+  <div class="form-tips"><b>Tip:</b> a useful tip here ...</div>
+  -->
+
+  <div class="form-row">
+    <label for="node-input-method"><i class="fa fa-exchange" aria-hidden="true"></i> method</label>
+    <select id="node-input-method" style="width:150px;">
+      <option value="">select ...</option>
+      <option value="clear">clear</option>
+      <option value="init">init</option>
+      <option value="append">append</option>
+      <option value="get">get</option>
+      <option value="xxx">xxx</option>
+    </select>
+  </div>
+
+  <div id="form-node-input-msgPath" class="form-row">
+    <label for="node-input-msgPath"><i class="fa fa-list" aria-hidden="true"></i> input</label>
+    <input type="text" id="node-input-msgPath" placeholder="msg.payload, msg.myLogEntry, ..." />
+    <div class="form-tips">log entry path in msg, e.g. msg.payload, msg.myLogEntry, ...</div>
+  </div>
+
+</script>
+
+<script type="text/html" data-help-name="Logger">
+  <p>log actions for log</p>
+</script>
+

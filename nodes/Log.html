@@ -1,0 +1,50 @@
+
+
+<script type="text/javascript">
+
+  RED.nodes.registerType('Log',{
+      category: 'config',
+      color: '#AAAA66',
+      defaults: {
+        name: { value: 'log', required: true },
+        maxEntries: { value: 10, required:true, validate:RED.validators.number() },
+        isAddTimestamp2Entries: { value: true }
+        },
+        label: function() {
+          return this.name + ':' + this.maxEntries + ':' + this.isAddTimestamp2Entries;
+        }
+  });
+</script>
+
+<script type="text/html" data-template-name="Log">
+  
+  <div class="form-row">
+    <label for="node-config-input-name"><i class="fa fa-tag"></i> name</label>
+    <input type="text" id="node-config-input-name">
+  </div>
+  
+  <div class="form-tips"><b>Tip: </b>a tip</div>
+  
+  <div class="form-row">
+    <label for="node-config-input-maxEntries"><i class="fa fa-list-ol" aria-hidden="true"></i> max-entries</label>
+    <select id="node-config-input-maxEntries" style="width:50px;">
+        <option value=10>10</option>
+        <option value=20>20</option>
+        <option value=50>50</option>
+        <option value=100>100</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <label>&nbsp;</label>
+    <input type="checkbox" id="node-config-input-isAddTimestamp2Entries" style="display:inline-block; width:auto; vertical-align:baseline;">
+    <label for="node-config-input-isAddTimestamp2Entries" style="width:300px;"> add timestamp to entries</label>
+  </div>
+
+
+</script>
+
+<script type="text/html" data-help-name="Log">
+  <p>a json log</p>
+</script>
+
