@@ -11,7 +11,8 @@ module.exports = {
   flow: require('./src/flow.js'),
   flowProperties: require('./src/flow-properties.js'),
   forEach: require('./src/forEach.js'),
-  log: require('./src/log.js')
+  log: require('./src/log.js'),
+  Mutex: require('async-mutex').Mutex,
 }
 
 // The end.

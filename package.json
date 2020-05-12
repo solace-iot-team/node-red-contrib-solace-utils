@@ -28,6 +28,7 @@
     }
   },
   "dependencies": {
+    "async-mutex": "^0.2.2",
     "lodash.endswith": "^4.2.1",
     "lodash.find": "^4.6.0",
     "lodash.get": "^4.4.2",
