@@ -1,0 +1,86 @@
+<!--
+* Solace utilities for Node-RED: MutexMethods
+* Copyright Solace Corporation and other contributors <https://solace.com/>
+* Released under Apache 2.0 license
+-->
+
+<script type="text/javascript">
+
+  RED.nodes.registerType('MutexMethods', {
+      category: 'solace utils',
+      color: '#AAAA66',
+      defaults: {
+          mutex: {value: '0', type: 'Mutex'},
+          name: { value: '' },
+          method: { value: '', required: true },
+          mutexTimeout: { value: '100', validate: function(v) {
+            let currentMethod = $('#node-input-method').val();
+            if(currentMethod === undefined || currentMethod !== 'acquireWithTimeout') return true;
+            let vNum = parseInt(v);
+            if(isNaN(vNum)) return false;
+            if(v < 10 || v > 5000) return false;
+            return true;
+          }}
+      },
+      icon: "font-awesome/fa-unlock-alt",
+      label: function() {
+        return this.name || "mutex";
+      },
+      labelStyle: function() {
+        return this.name?"node_label_italic":"";
+      },
+      paletteLabel: 'mutex',
+      inputs: 1,
+      outputs: 2,
+      outputLabels: [ "success", "failed" ],
+
+      oneditprepare: function() {
+        $("#node-input-method").on("change", function() {
+          if( $(this).val() === 'acquireWithTimeout') {
+            $("#form-node-input-mutexTimeout").show();
+          } else {
+            $("#form-node-input-mutexTimeout").hide();
+          }
+        });
+      },
+
+  });
+</script>
+
+<script type="text/html" data-template-name="MutexMethods">
+
+  <div class="form-row">
+    <label for="node-input-mutex"><i class="fa fa-unlock-alt"></i> mutex</label>
+    <input type="text" id="node-input-mutex" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> name</label>
+    <input type="text" id="node-input-name" placeholder="mutex.{method}({mutex-name})@{where}" />
+  </div>
+
+  <div class="form-tips"><b>Tip:</b> a useful tip here ...</div>
+  
+  <div class="form-row">
+    <label for="node-input-method"><i class="fa fa-exchange" aria-hidden="true"></i> method</label>
+    <select id="node-input-method" style="width:250px;">
+      <option value="">select ...</option>
+      <option value="acquireBlock">acquire/blocking</option>
+      <option value="acquireWithTimeout">acquire/with-timeout</option>
+      <option value="release">release</option>
+      <option value="getIsLocked">get/isLocked</option>
+    </select>
+  </div>
+
+  <div id="form-node-input-mutexTimeout" class="form-row">
+    <label for="node-input-mutexTimeout"><i class="fa fa-clock-o" aria-hidden="true"></i> timeout(ms)</label>
+    <input type="number" id="node-input-mutexTimeout" placeholder="100" min="10" max="5000" />
+    <div class="form-tips">timeout in milliseconds, 10 < timeout < 5000</div>
+  </div>
+
+</script>
+
+<script type="text/html" data-help-name="MutexMethods">
+  <p>methods for mutex</p>
+</script>
+

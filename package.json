@@ -15,16 +15,19 @@
     "node-red",
     "solace",
     "utils",
-    "error handling",
     "SolaceError",
-    "log",
-    "logger"
+    "Log",
+    "Logger",
+    "Mutex",
+    "MutexMethods"
   ],
   "node-red": {
     "version": ">=1.0.6",
     "nodes": {
       "Log": "nodes/Log.js",
-      "Logger": "nodes/Logger.js"
+      "Logger": "nodes/Logger.js",
+      "Mutex": "nodes/Mutex.js",
+      "MutexMethods": "nodes/MutexMethods.js"
     }
   },
   "dependencies": {

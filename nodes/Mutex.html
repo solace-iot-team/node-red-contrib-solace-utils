@@ -1,0 +1,38 @@
+<!--
+ * Solace utilities for Node-RED: Mutex
+ * Copyright Solace Corporation and other contributors <https://solace.com/>
+ * Released under Apache 2.0 license
+-->
+
+<script type="text/javascript">
+
+  RED.nodes.registerType('Mutex', {
+      
+    category: 'config',
+      
+    color: '#AAAA66',
+
+    defaults: {
+      name: { value: '', required: true },
+    },
+    label: function() { 
+      return this.name || 'mutex';
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="Mutex">
+  
+  <div class="form-row">
+    <label for="node-config-input-name"><i class="fa fa-tag"></i> name</label>
+    <input type="text" id="node-config-input-name">
+  </div>
+  
+  <div class="form-tips"><b>Tip: </b>a tip</div>
+
+</script>
+
+<script type="text/html" data-help-name="Mutex">
+  <p>a mutex</p>
+</script>
+

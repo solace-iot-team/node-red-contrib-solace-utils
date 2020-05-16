@@ -4,14 +4,6 @@
  * Released under Apache 2.0 license
  */
 
-
-/**
- * @todo
- * - config node: Log: the actual log
- * - palette node: Logger: the actions
- * 
- */
-
 module.exports = function(RED) {
 
   var misc = require('../src/misc.js');
