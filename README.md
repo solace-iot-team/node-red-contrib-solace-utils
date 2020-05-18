@@ -1,26 +1,8 @@
 # node-red-contrib-solace-utils
 
-Collection of utility components for Node-RED.
+**Do not use standalone.**
 
-## General
-
-  - misc.js: various js utility functions
-  - SolaceError.js: an error object
-
-## Flow & Subflow
-
-  - flow.js, flow-properties.js: helpers to create flows & subflows
-
-## forEach
-
-  - forEach.js: functions for subflow forEach
-
-## Nodes
-
-### Log & Logger
-
-  - logging nodes 
-
+Works only for [https://github.com/solace-iot-team/solace-asapio-demo.](https://github.com/solace-iot-team/solace-asapio-demo)
 
 ---
 The End.
