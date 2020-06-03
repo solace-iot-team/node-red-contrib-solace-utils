@@ -135,7 +135,7 @@ function updateMsgInstanceProperties(msg, meta, uprops) {
 }
 function isValidFlowMsg(msg, meta) {
   if(misc.isObjectEmpty(getMsgProperties(msg, meta))) {
-    console.log('\n\n\n\flow.isValidFlowMsg: isObjectEmpty = true');
+    console.log('\n\n\nflow.isValidFlowMsg: isObjectEmpty = true');
     console.log('flow.isValidFlowMsg: getMsgProperties = ' + JSON.stringify(getMsgProperties(msg, meta)));
   }
 

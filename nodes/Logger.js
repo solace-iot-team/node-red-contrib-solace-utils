@@ -37,6 +37,10 @@ module.exports = function(RED) {
             err = this.append(msg); 
           }
           break;
+          case 'prepend': {
+            err = this.prepend(msg); 
+          }
+          break;
           case 'get': {
             msg.payload = this.get(); 
           }
@@ -65,7 +69,11 @@ module.exports = function(RED) {
         }
 
       });
-
+      
+      node.on('close', function(removed, done) {
+        node.status({});
+        done();
+      });
   }
 
   Logger.prototype.clear = function() { 
@@ -84,6 +92,12 @@ module.exports = function(RED) {
     let logEntry = RED.util.getMessageProperty(msg, this.properties.msgPath);
     if(logEntry === undefined) return `cannot find input in msg:'${this.properties.msgPath}'`; 
     this.log.appendLog(logEntry);
+  }  
+
+  Logger.prototype.prepend = function(msg) { 
+    let logEntry = RED.util.getMessageProperty(msg, this.properties.msgPath);
+    if(logEntry === undefined) return `cannot find input in msg:'${this.properties.msgPath}'`; 
+    this.log.prependLog(logEntry);
   }  
 
   Logger.prototype.get = function() { 

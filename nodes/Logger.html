@@ -19,7 +19,7 @@
               //console.log('Log.msgPath.validate: currentMethod = ' + currentMethod);
 
             if(currentMethod === undefined) return true;
-            if(currentMethod !== 'init' && currentMethod !== 'append') return true;
+            if(currentMethod !== 'init' && currentMethod !== 'append' && currentMethod !== 'prepend') return true;
 
               //console.log("Log.msgPath.validate: v = '" + v + "'");
             if(v === undefined || v === null || v === '') return false;
@@ -43,7 +43,7 @@
 
       oneditprepare: function() {
         $("#node-input-method").on("change", function() {
-          if( $(this).val() === 'init' || $(this).val() === 'append') {
+          if( $(this).val() === 'init' || $(this).val() === 'append' || $(this).val() === 'prepend') {
             $("#form-node-input-msgPath").show();
           } else {
             $("#form-node-input-msgPath").hide();
@@ -76,6 +76,7 @@
       <option value="clear">clear</option>
       <option value="init">init</option>
       <option value="append">append</option>
+      <option value="prepend">prepend</option>
       <option value="get">get</option>
     </select>
   </div>

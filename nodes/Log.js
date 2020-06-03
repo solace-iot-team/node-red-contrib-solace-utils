@@ -52,9 +52,19 @@ module.exports = function(RED) {
   }
 
   Log.prototype.appendLog = function(logEntry) {
-    if(this.log.length+1 > this.properties.maxEntries) this.log.shift();
-    if(!misc.isObject(logEntry)) logEntry = { entry: logEntry };
-    if(!misc.isObjectEmpty(logEntry)) this.log.push(this.createLogEntry(logEntry));
+    if(!misc.isObjectEmpty(logEntry)) {
+      if(this.log.length+1 > this.properties.maxEntries) this.log.shift();
+      if(!misc.isObject(logEntry)) logEntry = { entry: logEntry };
+      this.log.push(this.createLogEntry(logEntry));
+    }
+  }
+
+  Log.prototype.prependLog = function(logEntry) {
+    if(!misc.isObjectEmpty(logEntry)) {
+      if(this.log.length+1 > this.properties.maxEntries) this.log.pop();
+      if(!misc.isObject(logEntry)) logEntry = { entry: logEntry };
+      this.log.unshift(this.createLogEntry(logEntry));
+    }
   }
 
   Log.prototype.getLog = function () { return this.log; }
