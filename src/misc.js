@@ -33,7 +33,8 @@ var _endsWith = require('lodash.endswith');
 var _find = require('lodash.find');
 var _merge = require('lodash.merge');
 var _toNumber = require('lodash.tonumber');
-
+var _sortBy = require('lodash.sortby');
+var _padStart = require('lodash.padstart');
 
 /*
 note: JSON.stringify() does not print empty keys. but they might still be there.
@@ -151,6 +152,12 @@ function merge(object, sources) {
 function toNumber(value) {
   return _toNumber(value);
 }
+function sortBy(collection, iteratees) {
+  return _sortBy(collection, iteratees)
+}
+function padStart(string, length, chars) {
+  return _padStart(string, length, chars);
+}
 
 /**
 * validations
@@ -229,6 +236,8 @@ module.exports = {
    find,
    merge,
    toNumber,
+   sortBy,
+   padStart,
    isValidPubTopicString,
    isValidId,
    validateStringPropertyIsValidPubTopic,
