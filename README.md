@@ -2,7 +2,7 @@
 
 **Do not use standalone.**
 
-Works only for [https://github.com/solace-iot-team/solace-asapio-demo.](https://github.com/solace-iot-team/solace-asapio-demo)
+Works only for a specific project.
 
 ---
 The End.
