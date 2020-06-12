@@ -10,7 +10,6 @@ module.exports = {
   misc: require('./src/misc.js'),
   flow: require('./src/flow.js'),
   flowProperties: require('./src/flow-properties.js'),
-  forEach: require('./src/forEach.js'),
   log: require('./src/log.js')
 }
 
