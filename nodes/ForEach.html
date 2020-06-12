@@ -1,0 +1,110 @@
+
+
+<script type="text/javascript">
+
+  RED.nodes.registerType('ForEach', {
+      category: 'solace utils',
+      color: '#AAAA66',
+      defaults: {
+          name: { value: '' },
+      },
+      inputs: 1,
+      outputs: 3,
+      outputLabels: [ "start", "items", "end" ],
+      icon: "split.svg",
+      label: function() {
+          return this.name || "forEach";
+      },
+      paletteLabel: "forEach",
+});
+
+</script>
+
+<script type="text/html" data-template-name="ForEach">
+
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> name</label>
+    <input type="text" id="node-input-name" placeholder="forEach({collection})@{where}" />
+  </div>
+
+  <!--
+    this does work, in file: locales/en-US/ForEach.json: { "ForEach": { "tip": "my tip"} }
+  <div class="form-tips" data-i18n="ForEach.tip"></div>
+  -->
+
+</script>
+
+<script type="text/x-red" data-help-name="ForEach">
+
+<p>Iterate over an input array of items and send item by item to output after receiving the next input.</p>
+<p>Use to control emitting the next item as part of the flow by sending any input after node has been initialized.</p>
+
+<h3>Inputs</h3>
+
+  <p>Two inputs:</p>
+  <ol class="node-ports">
+    <li>Initialize
+      <dl class="message-properties">
+          <dt>forEach
+              <span class="property-type">object</span>
+          </dt>
+          <dd>contains the start, end, and items array that are used as output.</dd>
+          <dt>forEach.start
+              <span class="property-type">any</span>
+          </dt>
+          <dd>sent as part of the start message</dd>
+          <dt>forEach.end
+              <span class="property-type">any</span>
+          </dt>
+          <dd>sent as part of the end message</dd>
+          <dt>forEach.items
+              <span class="property-type">array</span>
+          </dt>
+          <dd>the array containing the items to be sent</dd>
+      </dl>
+    </li>
+    <li>Next
+        <dl class="message-properties">
+            <dt>{any} <span class="property-type">any</span></dt>
+            <dd>any message will trigger the next item in the array to be sent out</dd>
+        </dl>
+    </li>
+  </ol>
+
+  <h4>Initialize Example:</h4>
+  <pre>
+    msg.forEach = {
+        start: {any},
+        end: {any},
+        items: {array}
+    }
+  </pre>
+
+<h3>Outputs</h3>
+<p>Three outputs: start, items, end.</p>
+
+<ol class="node-ports">
+    <li>Start output
+        <dl class="message-properties">
+            <dt>payload <span class="property-type">object</span></dt>
+            <dd>includes <code>start</code> from the input and <code>numItems</code>, the number of items in the array.</dd>
+        </dl>
+    </li>
+    <li>Next output
+        <dl class="message-properties">
+            <dt>payload.item <span class="property-type">object</span></dt>
+            <dd>contains <code>i</code> (item index, 0 based), <code>v</code> (value/the item), <code>l</code> (length/total number of items)</dd>
+        </dl>
+    </li>
+    <li>End output
+        <dl class="message-properties">
+            <dt>payload <span class="property-type">object</span></dt>
+            <dd>includes <code>end</code> from the input and <code>numItems</code>, the number of items in the array.</dd>
+        </dl>
+    </li>
+</ol>
+
+<h3>Details</h3>
+
+
+</script>

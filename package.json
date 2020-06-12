@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-solace-utils",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Solace utility nodes, functions & SolaceError object for Node-RED",
   "main": "index.js",
   "homepage": "https://github.com/solace-iot-team/node-red-contrib-solace-utils",
@@ -27,7 +27,8 @@
       "Log": "nodes/Log.js",
       "Logger": "nodes/Logger.js",
       "Mutex": "nodes/Mutex.js",
-      "MutexMethods": "nodes/MutexMethods.js"
+      "MutexMethods": "nodes/MutexMethods.js",
+      "ForEach": "nodes/ForEach.js"
     }
   },
   "dependencies": {
