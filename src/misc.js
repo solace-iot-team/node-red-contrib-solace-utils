@@ -158,6 +158,12 @@ function sortBy(collection, iteratees) {
 function padStart(string, length, chars) {
   return _padStart(string, length, chars);
 }
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
 
 /**
 * validations
@@ -194,17 +200,32 @@ function validateObjectPropertiesAgainstReference(o, oref, validateStringPropert
         if(!hasObjectPath(o, p)) issues.push({issue: 'missing property', property: p});
         else if(typeof(oref[p]) !== typeof(o[p])) issues.push({issue: 'property type mismatch', property: p, expected: typeof(oref[p]), received: typeof(o[p])});
         else {
-            switch(typeof(oref[p])) {
+
+            let type = typeof(oref[p]);
+            if(Array.isArray(oref[p])) type = "array";
+
+            switch(type) {
             case 'string':
                 if(validateStringProperty !== null) {
                   let issue = validateStringProperty(p, o[p]);
                   if(issue !== null) issues.push(issue);
                 }
                 break;
-            case 'object':
+            case 'object': {
+                //console.log('\n\n\n\n found an object \n\n\n\n\n');
                 let recursiveIssues = validateObjectPropertiesAgainstReference(o[p], oref[p], validateStringProperty);
                 issues = issues.concat(recursiveIssues);
-                break;
+              }
+              break;
+            case 'array': {
+                //console.log('found an array:' + p);
+                let recursiveIssues = validateObjectPropertiesAgainstReference(o[p], oref[p], validateStringProperty);
+                for(let i=0; i < recursiveIssues.length; i++) {
+                  recursiveIssues[i].property = p + '[]';
+                }
+                issues = issues.concat(recursiveIssues);
+              }
+              break;
             default:
                 break;
             }
@@ -238,6 +259,7 @@ module.exports = {
    toNumber,
    sortBy,
    padStart,
+   shuffleArray,
    isValidPubTopicString,
    isValidId,
    validateStringPropertyIsValidPubTopic,
